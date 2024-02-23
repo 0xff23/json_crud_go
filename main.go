@@ -1,6 +1,7 @@
 package main
 
 import (
+	"example.com/m/v2/controllers"
 	"example.com/m/v2/initializers"
 	"github.com/gin-gonic/gin"
 )
@@ -13,11 +14,11 @@ func init() {
 func main() {
 	r := gin.Default()
 
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	r.POST("/posts", controllers.PostCreate)
+	r.PUT("/posts/:id", controllers.PostUpdate)
+	r.GET("/posts", controllers.PostIndex)
+	r.GET("/posts/:id", controllers.PostShow)
+	r.DELETE("/posts/:id", controllers.PostDelete)
 
-	r.Run() // listen and serve on
+	r.Run()
 }
